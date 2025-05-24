@@ -1,15 +1,17 @@
 package com.annotateurproject.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 
 @Entity
 @Data
 @Getter @Setter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
 public class utilisateur {
 
     @Id
@@ -17,14 +19,15 @@ public class utilisateur {
     private Integer id;
     private String firstName;
     private String lastName;
-    @Column(name = "email", unique = true)
+
     private String email;
 
     private String password;
+    @Column(unique = true)
     private String login;
 
-
-    @OneToOne(cascade = CascadeType.PERSIST)
+private  boolean notActive=true;
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private role role;
 

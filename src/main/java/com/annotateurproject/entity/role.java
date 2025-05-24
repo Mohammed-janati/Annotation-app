@@ -1,7 +1,10 @@
 package com.annotateurproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -14,6 +17,9 @@ public class role {
 
     private String role;
 
+    @OneToMany(mappedBy = "role")
+    @JsonIgnore
+    private List<utilisateur> utilisateur;
 
     public role(String annotateur) {
         this.role = annotateur;
